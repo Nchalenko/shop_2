@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title><?= Config::get('site_name') ?></title>
+	<link rel="stylesheet" href="/webroot/css/style.css	">
+	<script src="/webroot/js/admin.js"></script>
+	<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="http://getbootstrap.com/examples/cover/cover.css" rel="stylesheet">
+	<link href="http://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/"><?= Config::get('site_name') ?> - <?= __('lng.admin', 'Admin Section') ?></a>
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<?php if (Session::get('login')) { ?>
+				<ul class="nav navbar-nav">
+					<li><a <?php if (App::getRouter()->getController() == 'pages'){ ?>class='active' <?php } ?>href="/admin/pages/">Страницы</a></li>
+
+<!--TODO Добавить выпадающее меню ПРОДУКТЫ - СКЛАД, где находятся все неотображаемые товара, которых нет в наличии-->
+
+<!--TODO Обьеденить три статические страницы в дропдаун кнопку РЕДАКТИРОВАТЬ СТАТИЧЕСКИЕ СТРАНЦИЫ-->
+
+					<li><a <?php if (App::getRouter()->getController() == 'products'){ ?>class='active' <?php } ?>href="/admin/products/">Товары</a></li>
+					<li><a <?php if (App::getRouter()->getController() == 'sales'){ ?>class='active' <?php } ?>href="/admin/sales/">Акции/Распродажи</a></li>
+					<li><a <?php if (App::getRouter()->getController() == 'contacts'){ ?>class='active' <?php } ?>href="/admin/contacts/">Обратная связь</a></li>
+					<li><a <?php if (App::getRouter()->getController() == 'delivery'){ ?>class='active' <?php } ?>href="/admin/delivery/">Условия доставки и оплаты</a></li>
+					<li><a <?php if (App::getRouter()->getController() == 'info'){ ?>class='active' <?php } ?>href="/admin/info/">О компании</a></li>
+					<li><a href="/admin/users/logout">Выйти</a></li>
+				</ul>
+			<?php } ?>
+		</div>
+	</div>
+</nav>
+<div class="container">
+	<div class="starter-template">
+		<?php if (Session::hasFlash()) { ?>
+			<div class="alert alert-info" role="alert">
+				<?php Session::flash(); ?>
+			</div>
+		<?php } ?>
+		<?= $data['content'] ?>
+	</div>
+</div>
+<script type="text/javascript">
+	setTimeout(function () {
+		$('.alert.alert-info').fadeOut('fast')
+	}, 5000);  //30000 = 30 секунд
+</script>
+</body>
+</html>

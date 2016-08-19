@@ -1,0 +1,32 @@
+<!-- TODO Сделать нормальный список товаров-->
+
+<h3>Товары</h3><br/>
+<table class="table table-stripped stuff" style="width: 400px">
+	<?php
+	foreach($data['product'] as $product_data)
+	{
+		?>
+		<tr>
+			<td>
+				<b>
+					<?=$product_data['title'] ?>
+				</b>
+			</td>
+			<td align="right">
+				<a href="/admin/products/edit/<?=$product_data['id']?>">
+					<button class="btn btn-sm btn-primary">Редактировать</button>
+				</a>
+				<a href="/admin/products/delete/<?=$product_data['id']?>" onclick="return confirmDelete()"><!--todo! Не работает 6:42-->
+					<button class="btn btn-sm btn-warning">Удалить</button>
+				</a>
+			</td>
+		</tr>
+	<?php } ?>
+</table>
+<br>
+
+<div>
+	<a href="/admin/products/add/">
+		<button class="btn btn-sm btn-success">Добавить новый товар</button>
+	</a>
+</div>

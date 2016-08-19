@@ -1,0 +1,50 @@
+<div class="col-sm-3">
+	<div class="left-sidebar">
+		<h2>Каталог</h2>
+		<div class="panel-group category-products">
+			<?php
+			foreach ($data['main_category'] as $main) {
+				echo '<h3>' . $main['title'] . '</h3>';
+				$id = $main['id'];
+				if ($main['id'] == $id) {
+					foreach ($data['category'] as $cat) {
+						if ($cat['parent_id'] == $id) {
+							?>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a href="/products/category/<?= $cat['id'] ?>" class="<?php if($cat['id'] == $data['checked_id']){echo 'active';}?>"><?= $cat['title'] ?></a></h4>
+								</div>
+							</div>
+							<?php
+						}
+					}
+				}
+			}
+			?>
+		</div>
+	</div>
+</div>
+
+<div class="col-sm-9 padding-right">
+	<div class="features_items"><!--features_items-->
+		<h2 class="title text-center">ТОВАРЫ</h2>
+
+		<?php foreach ($data['products'] as $product_data) { ?>
+
+			<div class="col-sm-3">
+				<div class="product-image-wrapper">
+					<div class="single-products">
+						<div class="productinfo text-center">
+							<a href="/products/view/<?= $product_data['alias'] ?>"><img height="250" src="<?= IMG_PATH . DS .$product_data['photo'] ?>"/></a>
+							<h2><?= $product_data['price']?> UAH</h2>
+							<h2><a href="/products/view/<?= $product_data['alias'] ?>"><?= $product_data['title'] ?></a></h2>
+							<p><?= $product_data['description'] ?></p>
+							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+	</div>
+</div>

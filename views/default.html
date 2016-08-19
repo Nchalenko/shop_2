@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title><?= Config::get('site_name') ?></title>
+	<link href="/webroot/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/webroot/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/webroot/css/prettyPhoto.css" rel="stylesheet">
+	<link href="/webroot/css/price-range.css" rel="stylesheet">
+	<link href="/webroot/css/animate.css" rel="stylesheet">
+	<link href="/webroot/css/main.css" rel="stylesheet">
+	<link href="/webroot/css/responsive.css" rel="stylesheet">
+	<script src="/webroot/js/html5shiv.js"></script>
+	<script src="/webroot/js/respond.min.js"></script>
+	<![endif]-->
+	<link rel="shortcut icon" href="/webroot/images/ico/favicon.ico">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/webroot/images/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/webroot/images/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/webroot/images/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="/webroot/images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body>
+
+<header id="header"><!--header-->
+	<div class="header_top"><!--header_top-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="contactinfo">
+						<ul class="nav nav-pills">
+							<li><a href="#"><i class="fa fa-phone"></i> +38 *** *** ** ** </a></li>
+							<li><a href="#"><i class="fa fa-envelope"></i> alex.shop@gmail.com</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="social-icons pull-right">
+						<ul class="nav navbar-nav">
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!--/header_top-->
+	<div class="header-middle"><!--header-middle-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="logo pull-left">
+						<a href="/"><img src="/webroot/images/home/logo.png" alt=""/></a>
+						<a class="navbar-brand" href="/"><?= Config::get('site_name') ?></a>
+					</div>
+				</div>
+				<div class="col-sm-8">
+					<div class="shop-menu pull-right">
+						<ul class="nav navbar-nav">
+							<li><a href="#"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
+							<?php if (isset($_SESSION['login'])){?>
+								<li><a href='#'><i class='fa fa-user'></i>Добро пожаловать, <?=$_SESSION['login'];?></a></li><?php } ?>
+							<?php if (Session::get('login')) {
+								echo '<li><a href="/users/logout"><i class="fa fa-lock"></i> Выход</a></li>';
+							} else {
+								echo '<li><a href="/users/"><i class="fa fa-lock"></i> Вход</a></li>';
+
+							}
+							?>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!--/header-middle-->
+
+	<div class="header-bottom"><!--header-bottom-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+					<div class="mainmenu pull-left">
+						<ul class="nav navbar-nav collapse navbar-collapse">
+							<li><a href="/"<?= Config::get('site_name') ?> class="active">Главная</a></li>
+							<li class="dropdown"><a href="#">Магазин<i class="fa fa-angle-down"></i></a>
+								<ul role="menu" class="sub-menu">
+									<li><a <?php if (App::getRouter()->getController() == 'products'){ ?>class='active'
+										   <?php } ?>href="/products/">Товары</a>
+									</li>
+									<li><a <?php if (App::getRouter()->getController() == 'basket'){ ?>class='active' <?php } ?>href="/basket/">Корзина</a>
+									</li>
+								</ul>
+							</li>
+							<li><a <?php if (App::getRouter()->getController() == 'pages'){ ?>class='active' <?php } ?>href="/pages/">Страницы</a>
+							</li>
+							<li><a <?php if (App::getRouter()->getController() == 'sales'){ ?>class='active'
+								   <?php } ?>href="/sales/">Акции/Распродажи</a>
+							</li>
+							<li><a <?php if (App::getRouter()->getController() == 'contacts'){ ?>class='active' <?php } ?>href="/contacts/">Обратная
+									связь</a></li>
+							<li><a <?php if (App::getRouter()->getController() == 'delivery'){ ?>class='active' <?php } ?>href="/delivery/">Условия
+									доставки и оплаты</a></li>
+							<li><a <?php if (App::getRouter()->getController() == 'info'){ ?>class='active' <?php } ?>href="/info/">О нас</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!--/header-bottom-->
+</header><!--/header-->
+
+<section>
+	<div class="container">
+		<div class="row">
+			<?= $data['content'] ?>
+		</div>
+	</div>
+</section>
+
+<footer id="footer"><!--Footer-->
+	<div class="footer-top">
+		<div class="col-sm-2 col-sm-offset-1">
+			<div class="single-widget">
+				<h2>Подписаться на смс рассылку</h2>
+				<form action="#" class="searchform">
+					<input type="text" placeholder="Ваш номер телефонна"/>
+					<button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
+					<p>Всегда оставайтесь вкурсе последних новостей<br/>Не пропустите нионой нашей скики...</p>
+				</form>
+			</div>
+		</div>
+		<div class="footer-widget">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-2 col-sm-offset-1">
+						<div>
+							<h5>Как добраться</h5>
+							<iframe
+								src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5498.731787087731!2d30.734858187974023!3d46.4414467068995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c633bf7c9b1b83%3A0x8a83a7078fa02746!2z0KTQvtC90YLQsNC90YHRjNC60LAg0LTQvtGA0L7Qs9CwLCA4LzYsINCe0LTQtdGB0LAsINCe0LTQtdGB0YzQutCwINC-0LHQu9Cw0YHRgtGM!5e0!3m2!1sru!2sua!4v1471555894866"
+								width="800" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>
+							</iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer-bottom">
+		<div class="container">
+			<div class="row">
+				<p class="pull-left">Alex.shop © 2016 Inc. All rights reserved.</p>
+			</div>
+		</div>
+	</div>
+
+</footer><!--/Footer-->
+
+<script type="text/javascript">
+	setTimeout(function () {
+		$('.alert.alert-info').fadeOut('fast')
+	}, 5000);  //30000 = 30 секунд
+</script>
+<script src="js/jquery.js"></script>
+<script src="js/price-range.js"></script>
+<script src="js/jquery.scrollUp.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.prettyPhoto.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

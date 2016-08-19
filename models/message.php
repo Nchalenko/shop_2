@@ -1,0 +1,41 @@
+<?php
+
+class Message extends Model
+{
+
+	public function save($data, $id = null)//todo Узнать где мы используем ИД
+	{
+		if (!isset($data['name']) || !isset($data['email']) || !isset($data['message'])) {
+			return false;
+		}
+		$id = (int)$id;
+		$name = $this->db->escape($data['name']);
+		$email = $this->db->escape($data['email']);
+		$message = $this->db->escape($data['message']);
+
+		if (!$id) {//Add new record;
+			$sql = "
+				insert into messages  
+					set name = '{$name}',
+			  		 	email = '{$email}',
+				  	 	message = '{$message}'
+			";
+		} else {// Update exsisting record;
+			$sql = "
+				update messages  
+					set name = '{$name}',
+			  		 	email = '{$email}',
+				  	 	message = '{$message}'
+				  	WHERE id = {$id}
+			";
+		}
+		return $this->db->query($sql);
+	}
+
+	public function getList(){
+		$sql = "select * from messages where 1";
+		return $this->db->query($sql);
+
+	}
+
+}

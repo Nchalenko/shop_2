@@ -1,0 +1,11 @@
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>tinymce.init({selector: 'textarea'});</script>
+<form method="post">
+<textarea name="edited" cols="60" rows="30">
+	<?php
+	print_r($data['info'][0]['content']);
+	?>
+</textarea>
+	<hr>
+	<input type="submit" value="Сохранить изменения">
+</form>
