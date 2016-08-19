@@ -62,7 +62,7 @@
 						<ul class="nav navbar-nav">
 							<li><a href="#"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
 							<?php if (isset($_SESSION['login'])){?>
-								<li><a href='#'><i class='fa fa-user'></i>Добро пожаловать, <?=$_SESSION['login'];?></a></li><?php } ?>
+								<li><a href='/cabinet/'><i class='fa fa-user'></i>Добро пожаловать, <?=$_SESSION['login'];?>, войти в кабинет</a></li><?php } ?>
 							<?php if (Session::get('login')) {
 								echo '<li><a href="/users/logout"><i class="fa fa-lock"></i> Выход</a></li>';
 							} else {

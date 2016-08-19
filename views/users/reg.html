@@ -1,19 +1,15 @@
-	<div class="col-sm-4">
-		<div class="signup-form"><!--sign up form-->
-			<h2>New User Signup!</h2>
-			<form action="" method="post" name="reg">
-				<input name="login" type="text" placeholder="Name"/>
-				<input name="email" type="email" placeholder="Email Address"/>
-				<input name="password" type="password" placeholder="Password"/>
-				<input name="password2" type="password" placeholder="Password"/>
-				<button type="submit" class="btn btn-default">Signup</button>
-			</form>
-		</div><!--/sign up form-->
-
-<?php
-print_r($_POST);
-?>
-
-		<br><br><br><br><br><br>
-	</div>
+<div class="col-sm-4">
+	<div class="signup-form"><!--sign up form-->
+		<h2>New User Signup!</h2>
+		<form action="" method="post" name="reg">
+			<input name="login" type="text" placeholder="Name" required/>
+			<input name="email" type="email" placeholder="Email Address" required/>
+			<input name="password" type="password" placeholder="Password" required/>
+			<input name="password2" type="password" placeholder="Password" required/>
+			<button type="submit" class="btn btn-default">Signup</button>
+		</form>
+	</div><!--/sign up form-->
+	<?php Session::flash();?>
+	<br><br><br><br><br><br>
+</div>
 

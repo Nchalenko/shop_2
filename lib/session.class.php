@@ -20,10 +20,6 @@ class Session
 		$_SESSION['flash_message'] = null;
 	}
 
-//	public static function delFlash()
-//	{
-//		$_SESSION['flash_message'] = null;
-//	}
 
 	public static function set($key, $value)
 	{
