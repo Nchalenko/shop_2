@@ -2,7 +2,7 @@
 	<div class="signup-form">
 		<h2>Форма заказа: </h2>
 		<hr>
-		<p>Вы заказали <b><?=Basket_Page::countItems(); ?> товаров</b> на ссумму <b><?=$data['total_price'];?></b> грн</p>
+		<p>Вы заказали <b><?=Basket_Page::countItems(); ?> товаров</b> на ссумму <b><?=$data['total_price'].',00';?></b> грн</p>
 		<hr>
 		<form action="" method="post" name="checkout">
 			<input name="name" type="text" placeholder="Представтесь пожалуйста :)" required/>
@@ -10,7 +10,7 @@
 			<input name="email" type="email" placeholder="Электронная почта" required/>
 			<textarea name="comment" rows="6" placeholder="Комментарий к заказу" ></textarea>
 			<hr>
-			<button style="margin-left: 435px;" type="submit" class="btn btn-default btn-success">ЗАКАЗАТЬ</button>
+			<button style="margin-left: 435px;" type="submit" class="btn btn-default btn-success" >ЗАКАЗАТЬ</button>
 		</form>
 	</div>
 	<br><br><br><br><br><br>

@@ -37,7 +37,7 @@
 					<div class="single-products">
 						<div class="productinfo text-center">
 							<a href="/products/view/<?= $product_data['alias'] ?>"><img height="250" src="<?= IMG_PATH . DS .$product_data['photo'] ?>"/></a>
-							<h2><?= $product_data['price']?> UAH</h2>
+							<h2><?= $product_data['price']?>,00 UAH</h2>
 							<h2><a href="/products/view/<?= $product_data['alias'] ?>"><?= $product_data['title'] ?></a></h2>
 							<p><?= $product_data['description'] ?></p>
 							<a href="/basket/add/<?=$product_data['id'];?>" data-id="<?=$product_data['id'];?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>

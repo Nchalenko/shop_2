@@ -17,7 +17,7 @@ class UsersController extends Controller
 				Session::set('login', $user['login']);
 				Session::set('role', $user['role']);
 			}
-			Router::redirect('/admin/');
+			Router::redirect('/admin/basket/');
 		}
 	}
 

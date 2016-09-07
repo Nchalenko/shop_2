@@ -31,7 +31,7 @@
 		<div class="row">
 			<div class="col-sm-5">
 				<div class="view-product">
-					<img width="100" src="<?= IMG_PATH . DS . $data['product']['photo'] ?>"/>
+					<img width="100" src="<?= IMG_PATH . DS . $data['product']['title'].'.jpg' ?>"/>
 				</div>
 			</div>
 			<div class="col-sm-7">
@@ -41,7 +41,7 @@
 <!--					</a>-->
 					<h2><?= $data['product']['title'] ?></h2>
 					<span>
-						<span><?= $data['product']['price'] ?> UAH </span>
+						<span><?= $data['product']['price'] ?>,00 грн </span>
 						<label>Количество:</label>
 						<input type="text" value="3"/>
                         	<a href="/basket/add/<?=$product_data['id'];?>" data-id="<?=$product_data['id'];?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>

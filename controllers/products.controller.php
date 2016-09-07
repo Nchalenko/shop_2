@@ -29,14 +29,14 @@ class ProductsController extends Controller
 			$this->data['products'] = $this->model->getByCategory($id);
 			$this->data['category'] = $this->model->getAll();
 			$this->data['checked_id'] = $params[0];
-		}
-		else{
+		} else {
 			$this->data['products'] = $this->model->getList(true);
 			$this->data['main_category'] = $this->model->getMainList();
 			$this->data['category'] = $this->model->getAll();
 		}
 	}
-public function admin_category()
+
+	public function admin_category()
 	{
 
 		$params = App::getRouter()->getParams();
@@ -47,8 +47,7 @@ public function admin_category()
 			$this->data['products'] = $this->model->getByCategory($id);
 			$this->data['category'] = $this->model->getAll();
 			$this->data['checked_id'] = $params[0];
-		}
-		else{
+		} else {
 			$this->data['products'] = $this->model->getList(true);
 			$this->data['main_category'] = $this->model->getMainList();
 			$this->data['category'] = $this->model->getAll();
@@ -78,10 +77,13 @@ public function admin_category()
 	public function admin_add()
 	{
 		$this->data['category'] = $this->model->getAll();
+
+		$this->model->image();
+
 		if ($_POST) {
 			$result = $this->model->save($_POST);
 			if ($result) {
-				Session::setFlash('Product was Added');
+				Session::setFlash("Product was Added");
 			} else {
 				Session::setFlash('Error.');
 			}
@@ -93,6 +95,7 @@ public function admin_category()
 	{
 
 		$this->data['category'] = $this->model->getAll();
+		$this->model->image();
 		if ($_POST) {
 			$id = isset($_POST['id']) ? $_POST['id'] : null;
 			$result = $this->model->save($_POST, $id);
@@ -124,4 +127,11 @@ public function admin_category()
 		}
 		Router::redirect('/admin/products/');
 	}
+
+	public function admin_shownotactive()
+	{
+		$this->data['notactive'] = $this->model->showNotActive();
+	}
+
+
 }

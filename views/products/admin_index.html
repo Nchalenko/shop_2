@@ -1,4 +1,4 @@
-<br><br>
+
 <table class="table table-stripped stuff" style="width: 1000px">
 	<tr>
 		<td><h3>Товары</h3></td>
@@ -8,12 +8,17 @@
 		<td><a href="/admin/products/add/">
 				<button class="btn btn-sm btn-success">Добавить новый товар</button>
 			</a></td>
+
+		<a href="/admin/products/shownotactive/">
+				<button class="btn btn-sm btn-success">Показать товары не в наличии</button>
+			</a><br><br>
 	</tr>
 
 	<?php
 	foreach ($data['product'] as $product_data) {
 		?>
 		<tr>
+			<td style="width: 20px;"><?=$product_data['id']?></td>
 			<td>
 				<b>
 					<?= $product_data['title'] ?>
@@ -24,9 +29,10 @@
 					<button class="btn btn-sm btn-primary">Редактировать</button>
 				</a>
 				<a href="/admin/products/delete/<?= $product_data['id'] ?>" onclick="return confirmDelete()"><!--todo! Не работает 6:42-->
-					<button class="btn btn-sm btn-warning">Удалить</button>
+					<button class="btn btn-sm btn-danger">Удалить</button>
 				</a>
 			</td>
+
 		</tr>
 	<?php } ?>
 </table>

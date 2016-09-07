@@ -72,7 +72,7 @@ class Product extends Model
 		$id = (int)$id;
 		$alias = $this->db->escape($data['alias']);
 		$title = $this->db->escape($data['title']);
-		$photo = $this->db->escape($data['photo']);
+		$photo = $title.'.jpg';
 		$price = $this->db->escape($data['price']);
 		$description = $this->db->escape($data['description']);
 		$category = $this->db->escape($data['category']);
@@ -115,6 +115,40 @@ class Product extends Model
 		return $this->db->query($sql);
 	}
 
+	public function showNotActive(){
+		$sql = "select * from products where is_active = '0'";
+		return $this->db->query($sql);
+	}
 
+	public function image(){
+		if (isset($_FILES['pic']['name'])) {
 
+			$file_name = $_FILES['pic']['name'];
+			$filetype = substr($file_name, strlen($file_name) - 3);
+			if ($filetype == "jpg" ||
+				$filetype == "jpeg" ||
+				$filetype == "gif" ||
+				$filetype == "bmp" ||
+				$filetype == "png"
+			) {
+				if ($_FILES['pic']['size'] != 0
+					AND $_FILES['pic']['size'] <= 819200
+				) {
+					echo $_FILES['pic']['tmp_name'];
+					if (is_uploaded_file($_FILES['pic']['tmp_name'])) {
+
+						if (move_uploaded_file($_FILES['pic']['tmp_name'],
+							'img'.DS.  $_POST['title'].'.jpg')) {
+
+							echo 'Файл ' . basename($_FILES['pic']['name']) .
+								' был успешно загружен в ';
+						} else {
+							echo basename($_FILES['pic']['name']) . " NOT!";
+						}
+					}
+				}
+			}
+		}
+
+	}
 }

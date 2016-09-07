@@ -17,7 +17,7 @@ class Session
 	public static function flash()
 	{
 		echo $_SESSION['flash_message'];
-//		$_SESSION['flash_message'] = null;
+		$_SESSION['flash_message'] = null;
 	}
 
 

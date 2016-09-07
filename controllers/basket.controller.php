@@ -58,6 +58,33 @@ class BasketController extends Controller
 		}
 
 		$this->model->checkout($_POST);
+
 	}
 
+	public function admin_index()
+	{
+		$this->data['orders'] = $this->model->getOrders();
+	}
+
+	public function admin_changeOrderStatus()
+	{
+		$params = App::getRouter()->getParams();
+		if (isset($params)) {
+			$id = $params[0];
+			$status = $params[1];
+			$this->model->changeOrderStatus($id, $status);
+		}
+		$referrer = $_SERVER['HTTP_REFERER'];
+		header("Location: $referrer");
+		return true;
+	}
+
+	public function deleteAll()
+	{
+		$this->model->deleteAll();
+
+		$referrer = $_SERVER['HTTP_REFERER'];
+		header("Location: $referrer");
+		return true;
+	}
 }
