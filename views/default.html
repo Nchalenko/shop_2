@@ -60,7 +60,7 @@
 				<div class="col-sm-8">
 					<div class="shop-menu pull-right">
 						<ul class="nav navbar-nav">
-							<li><a href="#"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
+							<li><a href="/basket/"><i class="fa fa-shopping-cart"></i> Корзина  (<span id="cart-count"><?php echo Basket_Page::countItems(); ?></span>)</a></li>
 							<?php if (isset($_SESSION['login'])){?>
 								<li><a href='/cabinet/'><i class='fa fa-user'></i>Добро пожаловать, <?=$_SESSION['login'];?>, войти в кабинет</a></li><?php } ?>
 							<?php if (Session::get('login')) {
@@ -98,7 +98,7 @@
 									<li><a <?php if (App::getRouter()->getController() == 'products'){ ?>class='active'
 										   <?php } ?>href="/products/">Товары</a>
 									</li>
-									<li><a <?php if (App::getRouter()->getController() == 'basket'){ ?>class='active' <?php } ?>href="/basket/">Корзина</a>
+									<li><a <?php if (App::getRouter()->getController() == 'basket'){ ?>class='active' <?php } ?>href="/basket/">Корзина</a><p></p>
 									</li>
 								</ul>
 							</li>
@@ -140,21 +140,7 @@
 				</form>
 			</div>
 		</div>
-		<div class="footer-widget">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-2 col-sm-offset-1">
-						<div>
-							<h5>Как добраться</h5>
-							<iframe
-								src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5498.731787087731!2d30.734858187974023!3d46.4414467068995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c633bf7c9b1b83%3A0x8a83a7078fa02746!2z0KTQvtC90YLQsNC90YHRjNC60LAg0LTQvtGA0L7Qs9CwLCA4LzYsINCe0LTQtdGB0LAsINCe0LTQtdGB0YzQutCwINC-0LHQu9Cw0YHRgtGM!5e0!3m2!1sru!2sua!4v1471555894866"
-								width="800" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>
-							</iframe>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+
 	</div>
 
 	<div class="footer-bottom">
@@ -167,16 +153,28 @@
 
 </footer><!--/Footer-->
 
+<script src="/webroot/js/jquery.js"></script>
+<script src="/webroot/js/price-range.js"></script>
+<script src="/webroot/js/jquery.scrollUp.min.js"></script>
+<script src="/webroot/js/bootstrap.min.js"></script>
+<script src="/webroot/js/jquery.prettyPhoto.js"></script>
+<script src="/webroot/js/main.js"></script>
+<script src="/webroot/js/jquery.js"
 <script type="text/javascript">
 	setTimeout(function () {
 		$('.alert.alert-info').fadeOut('fast')
 	}, 5000);  //30000 = 30 секунд
 </script>
-<script src="js/jquery.js"></script>
-<script src="js/price-range.js"></script>
-<script src="js/jquery.scrollUp.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.prettyPhoto.js"></script>
-<script src="js/main.js"></script>
+<script>
+	$(document).ready(function () {
+		$(".add-to-cart").click(function () {
+			var id = $(this).attr("data-id");
+			$.post("/basket/add/"+id, {}, function (data) {
+				$("#basket-count").html(data);
+			});
+			return false;
+		});
+	});
+</script>
 </body>
 </html>

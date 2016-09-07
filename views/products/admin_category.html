@@ -1,0 +1,55 @@
+<hr>
+<div class="col-sm-3">
+	<div class="left-sidebar" style="margin: 10px;"><br>
+		<h3>Каталог</h3>
+		<div class="panel-group category-products"><br>
+			<?php
+			foreach ($data['main_category'] as $main) {
+				echo '<h4>' . $main['title'] . '</h4>';
+				$id = $main['id'];
+				if ($main['id'] == $id) {
+					foreach ($data['category'] as $cat) {
+						if ($cat['parent_id'] == $id) {
+							?>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">
+										<a href="./<?= $cat['id'] ?>" class="<?php if ($cat['id'] == $data['checked_id']) {
+											echo 'active';
+										} ?>"><?= $cat['title'] ?></a></h3>
+								</div>
+							</div>
+							<?php
+						}
+					}
+				}
+			}
+			?>
+		</div>
+	</div>
+</div>
+<br><br>
+<a href="/admin/products/add/">
+	<button class="btn btn-sm btn-success">Добавить новый товар</button>
+</a>
+<br><br>
+
+<table class="table table-stripped stuff" style="margin: 20px; width: 600px">
+	<?php
+	foreach ($data['products'] as $product_data) {
+		?>
+		<tr>
+			<td>
+				<b><?= $product_data['title'] ?></b>
+			</td>
+			<td align="right">
+				<a href="/admin/products/edit/<?= $product_data['id'] ?>">
+					<button class="btn btn-sm btn-primary">Редактировать</button>
+				</a>
+				<a href="/admin/products/delete/<?= $product_data['id'] ?>" onclick="return confirmDelete()"><!--todo! Не работает 6:42-->
+					<button class="btn btn-sm btn-warning">Удалить</button>
+				</a>
+			</td>
+		</tr>
+	<?php } ?>
+</table>

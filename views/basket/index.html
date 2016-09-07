@@ -1,4 +1,28 @@
-<div class="inner cover">
-	<h1 class="cover-heading">КОРЗИНА</h1>
-	<p class="lead">ТУТ БУДЕТ КОРЗИНА</p>
+<h2>Вы собираетесь заказать данные товары:</h2>
+<br>
+<table class="table table-stripped" style="margin-left: 50px; width: 700px">
+	<tr>
+		<th>Название товара</th>
+		<th>Цена, ГРН</th>
+		<th>Колишечство, ШТ</th>
+	</tr>
+	<?php foreach ($data['productsbyid'] as $product) { ?>
+		<tr>
+			<td><a href="../products/view/<?= $product['title'] ?>"><?= $product['title'] ?></a></td>
+			<td><?= $product['price'] ?></td>
+			<td><input style="width: 50px;" type="number" autofocus value="<?= $data['productsInBasket'][$product['id']] ?>"/></td>
+			<td style="text-align: center;"><a href="./delete/<?=$product['id'];?>" class="btn btn-danger" name="delete">Удалить</a></td>
+		</tr>
+		<?php
+	} ?>
+</table>
+<hr>
+<div>
+	<a style="margin-left: 50px;" class="btn btn-info" href="../products/">Продолжить покупки</a>
+	<a style="margin-left: 400px;" class="btn btn-warning" href="#">Пересчитать</a>
+	<a style="margin-left: 300px;" class="btn btn-success" href="./checkout/">Оформить заказ</a>
+</div>
+<div style="text-align: right">
+	<h3>Всего к оплате:
+	<?= $data['total_price']; ?></h3>
 </div>

@@ -36,6 +36,24 @@ class ProductsController extends Controller
 			$this->data['category'] = $this->model->getAll();
 		}
 	}
+public function admin_category()
+	{
+
+		$params = App::getRouter()->getParams();
+
+		if (isset($params[0])) {
+			$id = strtolower($params[0]);
+			$this->data['main_category'] = $this->model->getMainList();
+			$this->data['products'] = $this->model->getByCategory($id);
+			$this->data['category'] = $this->model->getAll();
+			$this->data['checked_id'] = $params[0];
+		}
+		else{
+			$this->data['products'] = $this->model->getList(true);
+			$this->data['main_category'] = $this->model->getMainList();
+			$this->data['category'] = $this->model->getAll();
+		}
+	}
 
 	public function view()
 	{
@@ -53,6 +71,8 @@ class ProductsController extends Controller
 	public function admin_index()
 	{
 		$this->data['product'] = $this->model->getList();
+		$this->data['main_category'] = $this->model->getMainList();
+		$this->data['category'] = $this->model->getAll();
 	}
 
 	public function admin_add()

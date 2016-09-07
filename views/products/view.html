@@ -36,16 +36,15 @@
 			</div>
 			<div class="col-sm-7">
 				<div class="product-information"><!--/product-information-->
-					<a href="/products/view/<?= $data['product']['alias'] ?>"><img width="100" src="<?= IMG_PATH . DS . $data['product']['photo'] ?>"/></a>
+<!--					<a href="/products/view/--><?//= $data['product']['alias'] ?><!--">-->
+<!--						<img width="100" src="--><?//= IMG_PATH . DS . $data['product']['photo'] ?><!--"/>-->
+<!--					</a>-->
 					<h2><?= $data['product']['title'] ?></h2>
 					<span>
-						<span><?= $data['product']['price'] ?> UAH</span>
+						<span><?= $data['product']['price'] ?> UAH </span>
 						<label>Количество:</label>
 						<input type="text" value="3"/>
-                        	<button type="button" class="btn btn-fefault cart">
-                            	<i class="fa fa-shopping-cart"></i>
-                                В корзину
-							</button>
+                        	<a href="/basket/add/<?=$product_data['id'];?>" data-id="<?=$product_data['id'];?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
 					</span>
 					<p><b>Наличие:</b> На складе</p>
 				</div><!--/product-information-->

@@ -18,17 +18,17 @@
 							</div>
 							<?php
 						}
-					}
+					}//todo СДЕЛАТЬ НАВИГАЦИЮ ПО СТРАНИЦАМ
 				}
 			}
 			?>
 		</div>
 	</div>
 </div>
-
 <div class="col-sm-9 padding-right">
 	<div class="features_items"><!--features_items-->
 		<h2 class="title text-center">ТОВАРЫ</h2>
+
 
 		<?php foreach ($data['products'] as $product_data) { ?>
 
@@ -40,7 +40,8 @@
 							<h2><?= $product_data['price']?> UAH</h2>
 							<h2><a href="/products/view/<?= $product_data['alias'] ?>"><?= $product_data['title'] ?></a></h2>
 							<p><?= $product_data['description'] ?></p>
-							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
+							<a href="/basket/add/<?=$product_data['id'];?>" data-id="<?=$product_data['id'];?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
+
 						</div>
 					</div>
 				</div>

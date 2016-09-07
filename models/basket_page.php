@@ -3,51 +3,100 @@
 class Basket_Page extends Model
 {
 
-	private $products;
-
-	public function __construct()
+	public static function addProduct($id)
 	{
-		$this->products = Session::get('products') == null ?
-			array()
-			:
-			unserialize(Session::get('products'));
+		$id = intval($id);
+		$productsInBasket = array();
+
+		if (isset($_SESSION['products'])) {
+			$productsInBasket = $_SESSION['products'];
+		}
+
+		if (array_key_exists($id, $productsInBasket)) {
+			$productsInBasket[$id]++;
+		} else {
+			$productsInBasket[$id] = 1;
+		}
+
+		$_SESSION['products'] = $productsInBasket;
+		return self::countItems();
+	}
+
+	public function deleteProduct($id){
+		$id = intval($id);
+
+		unset($_SESSION['products'][$id]);
+	}
+
+	public function countItems()
+	{
+		if (isset($_SESSION['products'])) {
+			unset($_SESSION['products']['0']);
+			$count = 0;
+			foreach ($_SESSION['products'] as $id => $qty) {
+				$count = $count + $qty;
+			}
+			return $count;
+		} else {
+			return 0;
+		}
 	}
 
 	public function getProducts()
 	{
-		return $this->products;
-	}
-
-	public function addProduct($id)
-	{
-		$id = (int)$id;
-
-		if (!in_array($id, $this->products)) {
-			array_push($this->products, $id);
+		if (isset($_SESSION['products'])) {
+			return $_SESSION['products'];
 		}
-
-		Session::set('products', serialize($this->products));
+		return false;
 	}
 
-	public function deleteProduct($id)
+	public function getProductsByIds($id_arr)
 	{
-		$id = (int)$id;
+		$products = array();
+		$idsString = implode(', ', $id_arr);
+		$sql = "select * from products where id IN ($idsString)";
+		$result = $this->db->query($sql);
+		return $result;
+	}
 
-		$key = array_search($id, $this->products);
-		if ($key !== false){
-			unset($this->products[$key]);
+	public function getTotal($products)
+	{
+		$productsInCart = self::getProducts();
+		$total = 0;
+		if ($productsInCart){
+			foreach ($products as $item){
+				$total += $item['price'] * $productsInCart[$item['id']];
+			}
 		}
-
-		Session::set('products', serialize($this->products));
+		return $total;
 	}
 
-	public function clear()
-	{
-		Session::delete('products');
+	public function checkout($data){
+
+
+
+		if (!isset($data['name']) || !isset($data['phone']) || !isset($data['email'])) {
+			return false;
+		}
+		$productsInCart = self::getProducts();
+
+		$order = serialize($productsInCart);
+		$user_name = $this->db->escape($data['name']);
+		$user_phone = $this->db->escape($data['phone']);
+		$user_email = $this->db->escape($data['email']);
+		$user_comment = $this->db->escape($data['comment']);
+
+		$sql = "
+				insert into orders 
+						set user_name = '{$user_name}',
+			  		 	user_phone = '{$user_phone}',
+			  		 	user_email = '{$user_email}',
+			  		 	user_comment = '{$user_comment}',
+  				  	 	products = '{$order}'
+				  	";
+
+		return $this->db->query($sql);
+
 	}
 
-	public function isEmpty()
-	{
-		return !$this->products;
-	}
 }
