@@ -5,7 +5,8 @@
 		<td style="width: 5%;">№</td>
 		<td style="width: 10%;">Имя</td>
 		<td style="width: 25%;">Email</td>
-		<td style="width: 50%;">Сообщение</td>
+		<td style="width: 45%;">Сообщение</td>
+		<td style="width: 5%;"></td>
 	</tr>
 	<?php foreach ($data as $item) { ?>
 		<tr>
@@ -13,6 +14,7 @@
 			<td><?= $item['name'] ?></td>
 			<td><?= $item['email'] ?></td>
 			<td><?= $item['message'] ?></td>
+			<td><a class ="btn btn-sm btn-danger" href="./delete/<?= $item['id']?>">Удалить</a></td>
 		</tr>
 	<?php } ?>
 </table>

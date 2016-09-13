@@ -1,0 +1,47 @@
+<h2>Ваши заказы:</h2><br><br>
+<table class="table table-stripped" style="text-align: left; width: 1000px;">
+	<tr>
+		<th style="width: 5%;">№</th>
+		<th style="width: 10%;">Имя</th>
+		<th style="width: 15%;">Телефон</th>
+		<th style="width: 15%;">Email</th>
+		<th style="width: 30%;">Сообщение</th>
+		<th style="width: 15%;">Заказ</th>
+		<th style="width: 8%;">Сумма</th>
+		<th style="width: 3%;">Статус</th>
+	</tr>
+
+	<?php
+	foreach ($data['info'] as $order) { ?>
+		<tr>
+			<td><?= $order['id']; ?></td>
+			<td><?= $order['user_name']; ?></td>
+			<td><?= $order['user_phone']; ?></td>
+			<td><?= $order['user_email']; ?></td>
+			<td><?= $order['user_comment']; ?></td>
+			<td>
+				<?php $order['products'] = (unserialize($order['products']));
+				foreach ($order['products'] as $k => $v) {
+					echo '№ ' . $k . ' - ' . $v . "шт.<br>";
+				}
+				?>
+			</td>
+			<td><?= $order['totalsum']; ?></td>
+			<td style="text-align: match-parent; vertical-align: middle;">
+								<span><?php
+									switch ($order['status']) {
+										case "1":
+											echo "Обробатывается";
+											break;
+										case "2":
+											echo "Отказано";
+											break;
+										case "3":
+											echo "Исполнен";
+											break;
+									}
+									?></span>
+			</td>
+		</tr>
+	<?php } ?>
+</table>

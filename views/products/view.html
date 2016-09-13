@@ -42,11 +42,9 @@
 					<h2><?= $data['product']['title'] ?></h2>
 					<span>
 						<span><?= $data['product']['price'] ?>,00 грн </span>
-						<label>Количество:</label>
-						<input type="text" value="3"/>
-                        	<a href="/basket/add/<?=$product_data['id'];?>" data-id="<?=$product_data['id'];?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
+                        	<a href="/basket/add/<?=$data['product']['id'];?>" data-id="<?=$data['product']['id'];?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
 					</span>
-					<p><b>Наличие:</b> На складе</p>
+
 				</div><!--/product-information-->
 			</div>
 		</div>

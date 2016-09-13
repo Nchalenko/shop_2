@@ -6,11 +6,15 @@ class User extends Model
 	public function emailExcist($email)
 	{
 		$email = $this->db->escape($email);
-		$sql = "select email from users where `email` = '{$email}'";
+		$sql = "select email from users where email = '{$email}'";
 		$result = $this->db->query($sql);
+
 		if ($result[0]['email'] == $email) {
 			$result = false;
+		}else{
+			$result = true;
 		}
+
 		return $result;
 	}
 

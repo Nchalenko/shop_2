@@ -28,6 +28,7 @@ class Basket_Page extends Model
 
 		unset($_SESSION['products'][$id]);
 	}
+
 	public function deleteAll()
 	{
 		unset($_SESSION['products']);
@@ -94,10 +95,14 @@ class Basket_Page extends Model
 		$user_phone = $this->db->escape($data['phone']);
 		$user_email = $this->db->escape($data['email']);
 		$user_comment = $this->db->escape($data['comment']);
+		if (Session::get('id')) {
+			$user_id = Session::get('id');
+		}
 
 		$sql = "
 				insert into orders 
 						set user_name = '{$user_name}',
+			  		 	user_id = '{$user_id}',
 			  		 	user_phone = '{$user_phone}',
 			  		 	user_email = '{$user_email}',
 			  		 	user_comment = '{$user_comment}',
@@ -106,6 +111,7 @@ class Basket_Page extends Model
 				  	";
 
 		return $this->db->query($sql);
+
 
 	}
 

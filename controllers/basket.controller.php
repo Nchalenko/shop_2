@@ -48,16 +48,12 @@ class BasketController extends Controller
 
 	public function checkout()
 	{
-		$productsInBasket = false;
-		$productsInBasket = $this->model->getProducts();
-		$this->data['productsInBasket'] = $productsInBasket;
-		if ($productsInBasket) {
-			$productsByIds = array_keys($productsInBasket);
-			$this->data['productsbyid'] = $this->model->getProductsByIds($productsByIds);
-			$this->data['total_price'] = $this->model->getTotal($this->data['productsbyid']);
-		}
+		$this->index();
 
-		$this->model->checkout($_POST);
+		if ($this->model->checkout($_POST)){
+			$this->deleteAll();//todo Доработать еще отправку уведомления пользователю
+			Router::redirect('/');
+		}
 
 	}
 
@@ -83,6 +79,7 @@ class BasketController extends Controller
 	{
 		$this->model->deleteAll();
 
+		Session::flash('success', '');
 		$referrer = $_SERVER['HTTP_REFERER'];
 		header("Location: $referrer");
 		return true;

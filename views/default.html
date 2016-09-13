@@ -105,7 +105,7 @@
 									</li>
 								</ul>
 							</li>
-							<li><a <?php if (App::getRouter()->getController() == 'pages'){ ?>class='active' <?php } ?>href="/pages/">Страницы</a>
+							<li><a <?php if (App::getRouter()->getController() == 'pages'){ ?>class='active' <?php } ?>href="/pages/">Новости</a>
 							</li>
 							<li><a <?php if (App::getRouter()->getController() == 'sales'){ ?>class='active'
 								   <?php } ?>href="/sales/">Акции/Распродажи</a>
@@ -149,6 +149,11 @@
 <script src="/webroot/js/jquery.prettyPhoto.js"></script>
 <script src="/webroot/js/main.js"></script>
 <script src="/webroot/js/jquery.js"></script>
+<script type="text/javascript">
+	setTimeout(function () {
+		$('.alert.alert-info').fadeOut('fast')
+	}, 5000);  //30000 = 30 секунд
+</script>
 <script>
 	$(document).ready(function () {
 		$(".add-to-cart").click(function () {

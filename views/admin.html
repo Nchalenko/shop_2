@@ -21,7 +21,7 @@
 			<a class="navbar-brand" href="/"><?= Config::get('site_name') ?> - <?= __('lng.admin', 'Admin') ?></a>
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
-			<?php if (Session::get('login')) { ?>
+			<?php if (Session::get('login') == 'admin') { ?>
 				<ul class="nav navbar-nav">
 					<li><a <?php if (App::getRouter()->getController() == 'pages'){ ?>class='active' <?php } ?>href="/admin/pages/">Страницы</a></li>
 

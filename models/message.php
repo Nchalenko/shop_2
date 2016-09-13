@@ -3,7 +3,7 @@
 class Message extends Model
 {
 
-	public function save($data, $id = null)//todo Узнать где мы используем ИД
+	public function save($data, $id = null)
 	{
 		if (!isset($data['name']) || !isset($data['email']) || !isset($data['message'])) {
 			return false;
@@ -35,7 +35,11 @@ class Message extends Model
 	public function getList(){
 		$sql = "select * from messages where 1";
 		return $this->db->query($sql);
+	}
 
+	public function delete($id){
+		$sql = "delete from messages where id = $id";
+		return $this->db->query($sql);
 	}
 
 }

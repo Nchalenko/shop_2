@@ -13,4 +13,9 @@ class CabinetController extends Controller{
 
 	}
 
+	public function info(){
+		$id = $_SESSION['id'];
+		$this->data['info'] = $this->model->info($id);
+	}
+
 }
