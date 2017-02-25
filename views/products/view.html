@@ -4,21 +4,24 @@
 		<div class="panel-group category-products">
 			<?php
 			foreach ($data['main_category'] as $main) {
-				echo '<h3>' . $main['title'] . '</h3>';
-				$id = $main['id'];
-				if ($main['id'] == $id) {
-					foreach ($data['category'] as $cat) {
+                $id = $main['id'];
+                if ($main['id'] == $id) {
+                    echo '<h3 class="main-cat" data-id="' . $id . '">' . $main['title'] . '</h3>';
+                    echo '<div class="main-cats cat-' .$id . '">';
+                    foreach ($data['category'] as $cat) {
 						if ($cat['parent_id'] == $id) {
 							?>
 							<div class="panel panel-default">
-								<div class="panel-heading">
+							<div class="<?= ($cat['id'] === $data['product']['category']) ? 'active-cat' : '' ?> panel-heading">
 									<h4 class="panel-title">
-										<a href="/products/category/<?= $cat['id'] ?>"><?= $cat['title'] ?></a></h4>
+                                        <a href="/products/category/<?= $cat['id'] ?>"><?= $cat['title'] ?></a>
+                                    </h4>
 								</div>
 							</div>
 							<?php
 						}
 					}
+            ?></div><?
 				}
 			}
 			?>
@@ -30,7 +33,7 @@
 	<div class="product-details"><!--product-details-->
 		<div class="row">
 			<div class="col-sm-5">
-				<div class="view-product">
+                <div class="view-product">
 					<img width="100" src="<?= IMG_PATH . DS . $data['product']['title'].'.jpg' ?>"/>
 				</div>
 			</div>

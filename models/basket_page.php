@@ -79,8 +79,6 @@ class Basket_Page extends Model
 
 	public function checkout($data)
 	{
-
-
 		if (!isset($data['name']) || !isset($data['phone']) || !isset($data['email'])) {
 			return false;
 		}

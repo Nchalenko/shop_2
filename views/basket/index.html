@@ -4,17 +4,18 @@ if (!empty($data['productsbyid'])) {
 
 	<h2>Вы собираетесь заказать данные товары:</h2>
 	<br>
-	<table class="table table-stripped" style="margin-left: 50px; width: 700px">
+	<table class="table table-stripped card" style="margin-left: 50px; width: 700px">
 		<tr>
 			<th>Название товара</th>
 			<th>Цена, ГРН</th>
 			<th>Колишечство, ШТ</th>
 		</tr>
 		<?php foreach ($data['productsbyid'] as $product) { ?>
-			<tr>
+			<tr class="product-id" data-id="<?= $product['id']; ?>">
 				<td><a href="../products/view/<?= $product['title'] ?>"><?= $product['title'] ?></a></td>
 				<td><?= $product['price'] . ',00'; ?></td>
-				<td><input style="width: 50px;" type="number" autofocus value="<?= $data['productsInBasket'][$product['id']] ?>"/></td>
+				<td><span class="qty"><?= $data['productsInBasket'][$product['id']] ?></span></td>
+				<td><i class="btn fa fa-plus" style="margin-right: 25%;"></i><i class="btn fa fa-minus"></i></td>
 				<td style="text-align: center;"><a href="./delete/<?= $product['id']; ?>" class="btn btn-danger" name="delete">Удалить</a></td>
 			</tr>
 			<?php
@@ -23,13 +24,39 @@ if (!empty($data['productsbyid'])) {
 	<hr>
 	<div>
 		<a style="margin-left: 50px;" class="btn btn-info" href="../products/">Продолжить покупки</a>
-		<a style="margin-left: 350px;" class="btn btn-danger" href="./deleteall">Очистить корзину</a>
+		<a style="margin-left: 350px;" class="btn btn-danger clear_card" href="#">Очистить корзину</a>
 		<a style="margin-left: 300px;" class="btn btn-success" href="./checkout/">Оформить заказ</a>
 	</div>
 	<div style="text-align: right">
 		<h3>Всего к оплате:
-			<?= $data['total_price'] . ',00 грн'; ?></h3>
+			<span class="price"><?= $data['total_price'] . '</span>,00 грн'; ?></h3>
 	</div>
 <?php } else { ?>
 	<h1>Вы не выбрали ниодного товара</h1>
 <?php ;} ?>
+<script>
+
+	$('.clear_card').on('click', function() {
+		$.post("/basket/deleteall");
+		console.log(123);
+		$('.card').remove();
+		$('.price').text('0');
+	});
+
+    $('.fa-plus').on('click', function () {
+        $.post("/basket/add/" + $('.product-id').data('id'), {}, function () {
+            var prevCount = $("#korzina-count").text();
+            $("#korzina-count, .qty").text(+prevCount + 1);
+
+        });
+    });
+    
+    $('.fa-minus').on('click', function () {
+        $.post("/basket/delete/" + $('.product-id').data('id'), {}, function () {
+            var prevCount = $("#korzina-count").text();
+            $("#korzina-count, .qty").text(+prevCount - 1);
+
+        });
+    });
+    
+</script>

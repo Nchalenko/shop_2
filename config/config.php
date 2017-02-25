@@ -18,7 +18,7 @@ Config::set('default_action', 'index');
 
 Config::set('db.host', 'localhost');
 Config::set('db.user', 'root');
-Config::set('db.password', '');
+Config::set('db.password', '112233');
 Config::set('db.db_name', 'alex.shop');
 
 Config::set('salt', 'g347835ghr885hjr');

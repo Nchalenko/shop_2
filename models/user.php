@@ -58,10 +58,10 @@ class User extends Model
 		$password = $data['password'];
 		$email = $data['email'];
 
-		if ($this->emailExcist($email) == false) {
-			Session::setFlash('Пользователь с такой електронной почтой уже существует!');
-			return false;
-		}
+//		if ($this->emailExcist($email) == false) {
+//			Session::setFlash('Пользователь с такой електронной почтой уже существует!');
+//			return false;
+//		}
 
 		if (strlen($login) < 4) {
 			Session::setFlash('Логин должен быть больше 4 символов!');

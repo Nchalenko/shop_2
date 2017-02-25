@@ -76,5 +76,3 @@ class PagesController extends Controller
 		Router::redirect('/admin/pages/');
 	}
 }
-
-//todo Перехват исключений сделать в ИНДЕКС ПХП

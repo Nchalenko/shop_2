@@ -2,16 +2,16 @@
 
 class Session
 {
-//	protected static $flash_message;
+	protected static $flash_message;
 
 	public static function setFlash($message)
 	{
-		$_SESSION['flash_message'] = $message;
+//		$_SESSION['flash_message'] = $message;
 	}
 
 	public static function hasFlash()
 	{
-		return !is_null($_SESSION['flash_message']);
+//		return !is_null($_SESSION['flash_message']);
 	}
 
 	public static function flash()

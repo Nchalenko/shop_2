@@ -41,7 +41,7 @@ class ProductsController extends Controller
 
 		$params = App::getRouter()->getParams();
 
-		if (isset($params[0])) {
+		if ($params) {
 			$id = strtolower($params[0]);
 			$this->data['main_category'] = $this->model->getMainList();
 			$this->data['products'] = $this->model->getByCategory($id);

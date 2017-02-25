@@ -14,7 +14,7 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h3 class="panel-title">
-										<a href="./<?= $cat['id'] ?>" class="<?php if ($cat['id'] == $data['checked_id']) {
+										<a href="./<?= $cat['id'] ?>" class="<?php if (isset($data['checked_id']) && $cat['id'] == $data['checked_id']) {
 											echo 'active';
 										} ?>"><?= $cat['title'] ?></a></h3>
 								</div>

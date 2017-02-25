@@ -1,9 +1,8 @@
 <br><br><script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 <script>tinymce.init({selector: 'textarea'});</script>
 <form method="post">
-<textarea name="edited" cols="60" rows="30"><?php
-	print_r($data['sales'][0]['content']);
-	?>
+<textarea name="edited" cols="60" rows="30">
+	<?php print_r($data['sales'][0]['content']); ?>
 </textarea>
-	<input type="submit" value="Сохранить изменения">
+	<input type="submit" class="btn btn-success" value="Сохранить изменения">
 </form>

@@ -13,9 +13,10 @@ class Sale extends Model
 
 	public function editInfo($sales)
 	{
-		$sql = "update static
-		set content = '{$sales}'
-		WHERE page = 'sales'";
+		$sql = "update `static`
+		set `content` = '{$sales}'
+		WHERE `page` = 'sales'";
+
 		return $this->db->query($sql);
 	}
 }
