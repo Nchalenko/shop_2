@@ -25,9 +25,13 @@ class BasketController extends Controller
 	{
 		$params = App::getRouter()->getParams();
 		if (isset($params)) {
-			$id = $params[0];
-		}
-		$this->model->deleteProduct($id);
+            $id = $params[0];
+            if (isset($params[1])) {
+                $this->model->deleteProduct($id, 1);
+            } else {
+                $this->model->deleteProduct($id);
+            }
+        }
 		$referrer = $_SERVER['HTTP_REFERER'];
 		header("Location: $referrer");
 		return true;
@@ -50,10 +54,14 @@ class BasketController extends Controller
 	{
 		$this->index();
 
-		if ($this->model->checkout($_POST)){
+		$order = $this->model->checkout($_POST);
+		if (intval($order)) {
 			$this->deleteAll();//todo Доработать еще отправку уведомления пользователю
 			Router::redirect('/');
-		}
+			Session::setFlash('Ваш номе заказа ' . $order);
+		} else {
+            Session::setFlash('Что-то пошло не так, попробуйте еще раз');
+        }
 
 	}
 

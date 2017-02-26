@@ -22,11 +22,19 @@ class Basket_Page extends Model
 		return self::countItems();
 	}
 
-	public function deleteProduct($id)
+	public function deleteProduct($id, $ifOne = false)
 	{
 		$id = intval($id);
 
-		unset($_SESSION['products'][$id]);
+		if ($ifOne == true) {
+            $_SESSION['products'][$id]--;
+        } else {
+    		unset($_SESSION['products'][$id]);
+        }
+
+        if ($_SESSION['products'][$id] == 0) {
+            unset($_SESSION['products'][$id]);
+        }
 	}
 
 	public function deleteAll()
@@ -95,7 +103,9 @@ class Basket_Page extends Model
 		$user_comment = $this->db->escape($data['comment']);
 		if (Session::get('id')) {
 			$user_id = Session::get('id');
-		}
+		} else {
+            $user_id = 0;
+        }
 
 		$sql = "
 				insert into orders 
@@ -108,8 +118,9 @@ class Basket_Page extends Model
   				  	 	totalsum = '{$total}'
 				  	";
 
-		return $this->db->query($sql);
+        $this->db->query($sql);
 
+		return $this->db->insertId();
 
 	}
 

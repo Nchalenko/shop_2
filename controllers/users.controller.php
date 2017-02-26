@@ -42,7 +42,6 @@ class UsersController extends Controller
 			if ($user && $user['is_active'] && $hash == $user['password']) {
 				Session::set('id', $user['id']);
 				Session::set('login', $user['login']);
-				Session::set('role', $user['role']);
 				Router::redirect('/');
 
 			} else {
@@ -55,7 +54,12 @@ class UsersController extends Controller
 	public function reg()
 	{
 		if ($_POST && isset($_POST['login']) && isset($_POST['password']) && isset($_POST['password2']) && isset($_POST['email'])) {
-			$this->model->register($_POST);
+            $id = $this->model->register($_POST);
+            if (isset($id) && intval($id)) {
+                Session::set('id', $id);
+                Session::set('login', $_POST['login']);
+                Router::redirect('/');
+            }
 		}
 	}
 }

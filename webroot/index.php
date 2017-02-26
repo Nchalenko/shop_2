@@ -1,16 +1,6 @@
 <?php
-/**
- * Created by nik on 25.02.17.
- */
 
-/**
- * Created by PhpStorm.
- * User: nik
- * Date: 25.02.17
- * Time: 22:52
- */
-
-    define('DS', DIRECTORY_SEPARATOR);
+define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', dirname(dirname(__FILE__)));
 define('VIEWS_PATH', ROOT . DS . 'views');
 define('IMG_PATH', DS . 'img');

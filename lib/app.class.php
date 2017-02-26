@@ -14,9 +14,7 @@ class App
 	public static function run($uri)
 	{
 		self::$router = new Router($uri);
-
 		self::$db = new DB(Config::get('db.host'), Config::get('db.user'), Config::get('db.password'), Config::get('db.db_name'));
-
 		Lang::load(self::$router->getLanguage());
 
 		$controller_class = ucfirst(self::$router->getController()) . 'Controller';

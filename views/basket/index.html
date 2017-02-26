@@ -35,28 +35,28 @@ if (!empty($data['productsbyid'])) {
 	<h1>Вы не выбрали ниодного товара</h1>
 <?php ;} ?>
 <script>
-
 	$('.clear_card').on('click', function() {
 		$.post("/basket/deleteall");
-		console.log(123);
 		$('.card').remove();
 		$('.price').text('0');
 	});
 
     $('.fa-plus').on('click', function () {
-        $.post("/basket/add/" + $('.product-id').data('id'), {}, function () {
-            var prevCount = $("#korzina-count").text();
-            $("#korzina-count, .qty").text(+prevCount + 1);
-
-        });
+        let qtyCard = $("#korzina-count, .qty").html(),
+            prevCount = $(this.closest('.product-id')).find('.qty').html(),
+            id = $(this.closest('.product-id')).data('id');
+        $.post("/basket/add/" + id, {}, function () {});
+        $("#korzina-count").text(+qtyCard + 1);
+        $('[data-id=' + id + ']').find('.qty').text(+prevCount + 1)
     });
     
     $('.fa-minus').on('click', function () {
-        $.post("/basket/delete/" + $('.product-id').data('id'), {}, function () {
-            var prevCount = $("#korzina-count").text();
-            $("#korzina-count, .qty").text(+prevCount - 1);
-
-        });
+        let qtyCard = $("#korzina-count, .qty").html(),
+            prevCount = $(this.closest('.product-id')).find('.qty').html(),
+            id = $(this.closest('.product-id')).data('id');
+        $.post("/basket/delete/" + id + "/1", {}, function () {});
+        $("#korzina-count").text(+qtyCard - 1);
+        $('[data-id=' + id + ']').find('.qty').text(+prevCount - 1);
     });
     
 </script>
