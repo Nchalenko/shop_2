@@ -78,8 +78,6 @@ class ProductsController extends Controller
 	{
 		$this->data['category'] = $this->model->getAll();
 
-		$this->model->image();
-
 		if ($_POST) {
 			$result = $this->model->save($_POST);
 			if ($result) {
@@ -95,7 +93,6 @@ class ProductsController extends Controller
 	{
 
 		$this->data['category'] = $this->model->getAll();
-		$this->model->image();
 		if ($_POST) {
 			$id = isset($_POST['id']) ? $_POST['id'] : null;
 			$result = $this->model->save($_POST, $id);

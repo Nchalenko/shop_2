@@ -34,6 +34,11 @@
 			<label class="label-title" for="rate">Рейтинг</label>
 			<input type="text" name="rate" id="rate" value="<?= $data['product']['rate'] ?>" class="form-control">
 		</div>
+        <div class="form-group">
+            <label for="pic">Картинка</label>
+            <img width="100" src="<?= IMG_PATH . DS . $data['product']['id'].'.jpg' ?>"/>
+            <input type='file' name='pic'/>
+        </div>
 		<input type="submit" class="btn btn-success" value="Сохранить изменения"/>
 	</form>
 </div>

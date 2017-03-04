@@ -1,62 +1,62 @@
 <div class="col-sm-3">
-	<div class="left-sidebar">
-		<h2>Каталог</h2>
-		<div class="panel-group category-products">
-			<?php
-			foreach ($data['main_category'] as $main) {
-                $id = $main['id'];
-                if ($main['id'] == $id) {
-                    echo '<h3 class="main-cat" data-id="' . $id . '">' . $main['title'] . '</h3>';
-                    echo '<div class="main-cats cat-' .$id . '">';
-                    foreach ($data['category'] as $cat) {
-						if ($cat['parent_id'] == $id) {
-							?>
-							<div class="panel panel-default">
-							<div class="<?= ($cat['id'] === $data['product']['category']) ? 'active-cat' : '' ?> panel-heading">
-									<h4 class="panel-title">
-                                        <a href="/products/category/<?= $cat['id'] ?>"><?= $cat['title'] ?></a>
-                                    </h4>
-								</div>
-							</div>
-							<?php
-						}
-					}
-            ?></div><?
-				}
-			}
-			?>
-		</div>
-	</div>
+    <div class="left-sidebar">
+        <h2>Каталог</h2>
+        <div class="panel-group category-products">
+            <?php
+            foreach ($data['main_category'] as $main) {
+            $id = $main['id'];
+            if ($main['id'] == $id) {
+            echo '<h3 class="main-cat" data-id="' . $id . '">' . $main['title'] . '</h3>';
+            echo '<div class="main-cats cat-' .$id . '">';
+            foreach ($data['category'] as $cat) {
+                if ($cat['parent_id'] == $id) {
+                    ?>
+                    <div class="panel panel-default">
+                        <div class="<?= ($cat['id'] === $data['product']['category']) ? 'active-cat' : '' ?> panel-heading">
+                            <h4 class="panel-title">
+                                <a href="/products/category/<?= $cat['id'] ?>"><?= $cat['title'] ?></a>
+                            </h4>
+                        </div>
+                    </div>
+                    <?php
+                }
+            }
+            ?></div><?php
+        }
+        }
+        ?>
+    </div>
+</div>
 </div>
 
 <div class="col-sm-9 padding-right">
-	<div class="product-details"><!--product-details-->
-		<div class="row">
-			<div class="col-sm-5">
+    <div class="product-details"><!--product-details-->
+        <div class="row">
+            <div class="col-sm-5">
                 <div class="view-product">
-					<img width="100" src="<?= IMG_PATH . DS . $data['product']['title'].'.jpg' ?>"/>
-				</div>
-			</div>
-			<div class="col-sm-7">
-				<div class="product-information"><!--/product-information-->
-<!--					<a href="/products/view/--><?//= $data['product']['alias'] ?><!--">-->
-<!--						<img width="100" src="--><?//= IMG_PATH . DS . $data['product']['photo'] ?><!--"/>-->
-<!--					</a>-->
-					<h2><?= $data['product']['title'] ?></h2>
-					<span>
+                    <img width="100" src="<?= IMG_PATH . DS . $data['product']['id'].'.jpg' ?>"/>
+                </div>
+            </div>
+            <div class="col-sm-7">
+                <div class="product-information"><!--/product-information-->
+                    <a href="/products/view/<?= $data['product']['alias'] ?>">
+                        <img width="100" src="<?= IMG_PATH . DS . $data['product']['photo'] ?>"/>
+                    </a>
+                    <h2><?= $data['product']['title'] ?></h2>
+                    <span>
 						<span><?= $data['product']['price'] ?>,00 грн </span>
                         	<a href="/basket/add/<?=$data['product']['id'];?>" data-id="<?=$data['product']['id'];?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
 					</span>
 
-				</div><!--/product-information-->
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-12">
-				<h5>Описание товара</h5>
-				<p><?= $data['product']['description'] ?></p>
-			</div>
-		</div>
-	</div><!--/product-details-->
+                </div><!--/product-information-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h5>Описание товара</h5>
+                <p><?= $data['product']['description'] ?></p>
+            </div>
+        </div>
+    </div><!--/product-details-->
 </div>
 
